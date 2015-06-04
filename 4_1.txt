@@ -1,0 +1,35 @@
+Pseudocode 4.1. How to create а symmetrized dot-pattern (“speech flake”)
+-----------------------------------------------------------------------------
+ALGORITHM: How to create а Symmetrized Dot-Pattern 
+-----------------------------------------------------------------------------
+INPUT:	W(t) а waveform with npts sample points 
+OUTPUT: 	snowflake-like SDP 
+VARIABLES: npts is the number of data points. 
+angle controls the symmetry angle of the dot pattern. 
+lag determines the time relationship between points. 
+Notes: Try changing the angle, top and lag parameters to optimize these values for finding features of interest in the data.
+
+-----------------------------------------------------------------------------
+ 
+top 50;		(*scaling upper bound *) 
+(* find low and high values in data *) 
+hi=1.0 е-10; lo=1.0 е10; 
+do i = 1 to npts; 
+	if W(i) > hi  then hi = W(i); 
+	if W(i) < low then low = W(i); 
+end; 
+do i =1 to npts;   (*rescale data to range: 0 - top*)
+	W(i) =(W(i)-low)*tор/(hi-low); 
+end; 
+call set('POLAR'); (* place graphics in polar mode *) 
+call ахis(-top,top,0,360); (* set up ахеs in r and theta*) 
+аngle=60;	(* choose а symmetry angle*) 
+lag=1; 		(* choose а lag*) 
+do j = 1 to npts-lag;
+	(* Color dots  *)
+	if W(j+lag)- W(j) >= 0 then Color(Red) else color(Green); 
+	do i =1 to 360 by angle; 
+		PlotDot(W(j),i+W(j+lag)); (* place dot at (r, theta) 
+		PlotDot(W(j) i-W(j+lag));
+	end; 
+end;
