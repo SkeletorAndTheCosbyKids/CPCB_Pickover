@@ -1,0 +1,19 @@
+
+ALGORITHM: Autocorrelation Function 
+----------------------------------------------------------
+Variables: npts = the number of data points 
+Input = array of samples from a digitized waveform. 
+Auto = autocorrelation function 
+Notes: If the input data is a function of time then the 
+autocorrelation function is also a function of time. 
+auto(*) = 0; (* initialize array *) 
+do p = 0 to npts-1; 
+	do q = 1 to npts - p; 
+		auto(p) = auto(p) + input(q)*input(q+p);
+	end; 
+	(* correction factor *) 
+	auto(p) = auto(p)* (1/(npts-p)); 
+end; 
+
+
+
