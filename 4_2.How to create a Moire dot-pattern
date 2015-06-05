@@ -1,0 +1,24 @@
+Pseudocode 4.2. How to create a Moire dot-pattern.
+ALGORITHM: How to Create a Moire Dot-Pattern 
+----------------------------------------------------------
+Variables: 
+NumDots = the number of dots (e.g. 10,000) 
+Angle = the rotation angle (e.g. 1 degree) 
+sf = scale factor (e.g. 1.1) 
+Notes: The display area is assumed to go from 0 to 100. Random 
+numbers are generated on the interval (0,1). The reader may 
+experiment by gradually increasing the angle until the eye can no 
+longer detect correlations. 
+----------------------------------------------------------
+DO i = 1 to NumDots; 
+	GenRand(randx); GenRand(randy); (* Generate random numbers *) 
+	randx=randx*100; randy=randy*100; 
+	PrintDot(randx,randy); 
+	(* Rotate and Scale; Center is at (50,50) *) 
+	randxx =sf*((randx-50)*cosd(angle)+(randy-50)*sind(angle)) + 50; 
+	randy =sf*((randy-50)*cosd(angle) — (randx-50)*sind(angle)) + 50; 
+	randx = randxx; 
+	PrintDot(randx,randy); (* Print superimposed pattern *) 
+END; 
+
+
